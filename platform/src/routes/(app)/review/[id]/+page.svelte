@@ -340,7 +340,8 @@
 				<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" /></svg>
 			</button>
 		</header>
-		{#if claimError || nextMsg}
+		<!-- Once it's decided, the saved message says it instead. -->
+		{#if claimError || (nextMsg && !result)}
 			<p class="notice small" role="status">{claimError || nextMsg}</p>
 		{/if}
 
@@ -558,6 +559,12 @@
 						{#if result.stamps_paid || result.boxes_granted.length}
 							<span>Paid {result.stamps_paid} stamps{result.boxes_granted.length ? ` and gave ${result.boxes_granted.length} box(es)` : ''}.</span>
 						{/if}
+						<!-- The bar's links too, since on a phone it's scrolled away by now. -->
+						<div class="row">
+							<button class="btn small primary" onclick={nextReview} disabled={moving}>{moving ? 'Finding one…' : 'Next review'}</button>
+							<a class="btn small ghost" href="/review?stage={queueStage}">Back to the queue</a>
+						</div>
+						{#if nextMsg}<span>{nextMsg}</span>{/if}
 					</div>
 				{/if}
 				{#if stage && d.can_decide}
