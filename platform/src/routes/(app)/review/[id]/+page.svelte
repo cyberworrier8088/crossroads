@@ -128,9 +128,10 @@
 
 	let nextMsg = $state('');
 	let moving = $state(false);
-	// The queue this page belongs to: the ship's stage, or the stage it was
-	// just decided at.
-	const queueStage = $derived(stage ?? result?.stage ?? 'review');
+	// The queue this page belongs to: the ship's stage if you can decide it,
+	// or else the stage you just decided it at (a fraud reviewer who passed it
+	// goes back to the fraud queue, not HQ's).
+	const queueStage = $derived((d?.can_decide && stage) || result?.stage || stage || 'review');
 	// Next review: skip this ship if it's still waiting for you (so the queue
 	// doesn't hand it straight back), then claim the next one.
 	async function nextReview() {
