@@ -12,7 +12,7 @@
 		['sign_in', 'Sign-ins', []],
 		['special_stamp', 'Special stamps', [['special_stamp.issued', 'Issued'], ['special_stamp.used', 'Used']]],
 		['box', 'Boxes', [['box.granted', 'Granted']]],
-		['stamps', 'Stamps', [['stamps.payout', 'Payouts'], ['stamps.bonus', 'Bonuses'], ['stamps.purchase', 'Purchases'], ['stamps.refund', 'Refunds'], ['stamps.adjustment', 'Adjustments']]],
+		['stamps', 'Tickets', [['stamps.payout', 'Payouts'], ['stamps.bonus', 'Bonuses'], ['stamps.purchase', 'Purchases'], ['stamps.refund', 'Refunds'], ['stamps.adjustment', 'Adjustments']]],
 		['role', 'Roles', [['role.changed', 'Changed']]],
 		['order', 'Orders', [['order.fulfilled', 'Fulfilled'], ['order.cancelled', 'Cancelled']]]
 	];
@@ -65,7 +65,7 @@
 		const d = e.details;
 		switch (e.kind) {
 			case 'request':
-				return `${d.method} ${d.route || d.path}`;
+				return `${d.method} ${d.route || d.path}${d.unrecorded ? ` (${d.unrecorded} before it weren't recorded: too many too fast)` : ''}`;
 			case 'sign_in':
 				return `Signed in${d.first_time ? ' for the first time' : ''}${d.dev ? ` (dev, as ${d.role})` : ''} from ${d.ip || 'somewhere'}`;
 			case 'special_stamp.issued': {
@@ -92,7 +92,7 @@
 				refund: `back for ${d.item} (order #${d.order_id})`,
 				adjustment: `“${d.note}”`
 			}[e.kind.slice(7)];
-			return `${signed(d.amount)} stamps ${what ?? ''}, now ${d.balance}`;
+			return `${signed(d.amount)} tickets ${what ?? ''}, now ${d.balance}`;
 		}
 		if (e.kind.startsWith('order.')) return `Order #${d.order_id} (${d.item}): ${d.from} → ${d.to}`;
 		return e.kind;
