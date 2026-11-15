@@ -282,15 +282,15 @@
 		if (stage === 'review') {
 			const over = overriding && Number(approvedHours) * 3600 > sub.new_seconds;
 			if (sendToFraud) return 'It goes to the fraud check, then HQ.';
-			if (over && !failing.some((c) => c.fraud)) return 'Approving more than Hackatime tracked always waits for HQ sign-off, even if you have it yourself. Stamps are paid then.';
+			if (over && !failing.some((c) => c.fraud)) return 'Approving more than Hackatime tracked always waits for HQ sign-off, even if you have it yourself. Tickets are paid then.';
 			return failing.some((c) => c.fraud)
 				? 'The automatic checks flagged it, so it goes to the fraud check, then HQ.'
 				: session.me.can_hq_review
-					? "Unless the fraud check is on for every ship, you have HQ sign-off, so this approval is final: stamps are paid right away."
-					: 'Unless the fraud check is on for every ship, it goes to HQ for sign-off. Stamps are paid then.';
+					? "Unless the fraud check is on for every ship, you have HQ sign-off, so this approval is final: tickets are paid right away."
+					: 'Unless the fraud check is on for every ship, it goes to HQ for sign-off. Tickets are paid then.';
 		}
 		if (stage === 'fraud') return 'Passing sends it to HQ for sign-off. You can only lower the hours.';
-		return 'Signing off pays the stamps and boxes, and sends the ship to the Unified YSWS DB.';
+		return 'Signing off pays out the tickets and boxes, and sends the ship to the Unified YSWS DB.';
 	});
 </script>
 
@@ -558,7 +558,7 @@
 					<div class="callout good small" role="status">
 						<strong>Saved. It's now: {STATUS_LABELS[d.submission.status] ?? d.submission.status}.</strong>
 						{#if result.stamps_paid || result.boxes_granted.length}
-							<span>Paid {result.stamps_paid} stamps{result.boxes_granted.length ? ` and gave ${result.boxes_granted.length} box(es)` : ''}.</span>
+							<span>Paid {result.stamps_paid} tickets{result.boxes_granted.length ? ` and gave ${result.boxes_granted.length} box(es)` : ''}.</span>
 						{/if}
 						<!-- The bar's links too, since on a phone it's scrolled away by now. -->
 						<div class="row">

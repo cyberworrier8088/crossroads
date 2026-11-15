@@ -76,7 +76,7 @@
 	}
 	const doAdjust = (e) => {
 		e.preventDefault();
-		run(() => api('POST', `/admin/users/${selected.id}/stamp-adjustments`, { amount: Number(adjust.amount), note: adjust.note }), (r) => `${r.name} now has ${r.stamps} stamps.`).then(() => (adjust = { amount: 0, note: '' }));
+		run(() => api('POST', `/admin/users/${selected.id}/stamp-adjustments`, { amount: Number(adjust.amount), note: adjust.note }), (r) => `${r.name} now has ${r.stamps} tickets.`).then(() => (adjust = { amount: 0, note: '' }));
 	};
 	const giveBox = () => run(() => api('POST', `/admin/users/${selected.id}/boxes`, { box_type_id: Number(boxTypeId) }), () => `Gave ${selected.name} a box.`);
 	const giveStamp = () => run(() => api('POST', `/admin/users/${selected.id}/special-stamps`, { special_stamp_type_id: Number(stampTypeId) }), (s) => `Gave ${selected.name} a ${s.type.name}.`);
@@ -141,7 +141,7 @@
 
 	<div class="card table-wrap">
 		<table>
-			<thead><tr><th>Name</th><th>Email</th><th>Slack</th><th>Stamps</th><th>Verified</th><th>Role</th><th>Review stages</th><th></th></tr></thead>
+			<thead><tr><th>Name</th><th>Email</th><th>Slack</th><th>Tickets</th><th>Verified</th><th>Role</th><th>Review stages</th><th></th></tr></thead>
 			<tbody>
 				{#each users as u}
 					<tr class:you={selected?.id === u.id}>
@@ -187,12 +187,12 @@
 
 	{#if selected}
 		<section class="card">
-			<div class="card-title"><h2>{selected.name}: {selected.stamps} stamps</h2><button class="link-btn small" onclick={() => (selected = null)}>Close</button></div>
+			<div class="card-title"><h2>{selected.name}: {selected.stamps} tickets</h2><button class="link-btn small" onclick={() => (selected = null)}>Close</button></div>
 			<form class="row" onsubmit={doAdjust}>
 				<input type="number" bind:value={adjust.amount} style="max-width: 110px" aria-label="Amount" />
 				<input bind:value={adjust.note} placeholder="Why (required)" required style="max-width: 320px" />
-				<button class="btn">Adjust stamps</button>
-				<span class="small muted">Negative takes stamps away, even below zero.</span>
+				<button class="btn">Adjust tickets</button>
+				<span class="small muted">Negative takes tickets away, even below zero.</span>
 			</form>
 			<div class="row">
 				<select bind:value={boxTypeId} style="max-width: 220px" aria-label="Box type">

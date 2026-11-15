@@ -33,7 +33,7 @@
 <div class="page-head">
 	<div class="stack-sm">
 		<h1>Admin</h1>
-		<p class="muted small">Setting up for launch: stamp types → box types and their drops → milestones → shop items (the ticket costs 1,800). See planning/INTEGRATING.md.</p>
+		<p class="muted small">Setting up for launch: stamp types → box types and their drops → milestones → shop items (the rail pass costs 1,800). See planning/INTEGRATING.md.</p>
 	</div>
 </div>
 

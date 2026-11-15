@@ -85,6 +85,6 @@ Leave `AIRTABLE_TOKEN` empty in development unless the base ID points at a test 
 
 ## Rules the schema enforces
 
-- **Stamps** are the currency. `stamp_ledger` is append-only, and every insert updates `users.stamps`. A purchase that would take someone below zero fails. Admin adjustments can go negative, so stamps already spent can be clawed back from a fraudulent project.
+- **Stamps** are the currency, called tickets everywhere people see it (and the `ticket` shop item is called the rail pass). `stamp_ledger` is append-only, and every insert updates `users.stamps`. A purchase that would take someone below zero fails. Admin adjustments can go negative, so stamps already spent can be clawed back from a fraudulent project.
 - **Submissions** pay out once, and only for time added since the project's last approved submission. A project has at most one pending submission, and each Hackatime project counts toward only one of its owner's projects.
 - **Special stamps** come from boxes, one box per milestone per person. Each type has an optional `supply_cap`. A submission takes at most one special stamp, so effects don't stack.

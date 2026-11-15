@@ -64,7 +64,7 @@
 		<div class="grid-halves">
 			<label class="field"><span>Name</span><input required bind:value={form.name} /></label>
 			<label class="field"><span>Rarity</span><select bind:value={form.rarity}>{#each RARITIES as r}<option>{r}</option>{/each}</select></label>
-			<label class="field"><span>Effect</span><select bind:value={form.effect}><option value="none">none (collectible)</option><option value="priority_review">priority_review (Express)</option><option value="stamp_multiplier">stamp_multiplier (+10% stamps, Golden Spike)</option></select></label>
+			<label class="field"><span>Effect</span><select bind:value={form.effect}><option value="none">none (collectible)</option><option value="priority_review">priority_review (Express)</option><option value="stamp_multiplier">stamp_multiplier (+10% tickets, Golden Spike)</option></select></label>
 			<label class="field"><span>Supply cap <em>empty = unlimited</em></span><input type="number" min="0" bind:value={form.supply_cap} /></label>
 			<label class="field"><span>Image link <em>optional</em></span><input type="url" bind:value={form.image_url} /></label>
 			<label class="field"><span>Claim code <em>empty = can't be claimed; anyone with /claim/code gets one</em></span><input pattern="[A-Za-z0-9\-]+" maxlength="64" bind:value={form.claim_code} /></label>
